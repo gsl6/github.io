@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-     Hello Word
+     Gsl&#39;s blog
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -48,10 +48,10 @@
     
   <div class="cover-frame">
     <div class="bg-box">
-      <img src="/images/cover1.jpg" alt="image frame" />
+      <img src="/images/cover4.jpg" alt="image frame" />
     </div>
     <div class="cover-inner text-center text-white">
-      <h1><a href="/">Hello Word</a></h1>
+      <h1><a href="/">Gsl&#39;s blog</a></h1>
       <div id="subtitle-box">
         
         <span id="subtitle"></span>
@@ -77,6 +77,143 @@
     
     
     
+    
+    <article id="post-多表查询和子查询" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/05/28/%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%92%8C%E5%AD%90%E6%9F%A5%E8%AF%A2/"
+    >多表查询和子查询</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/05/28/%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%92%8C%E5%AD%90%E6%9F%A5%E8%AF%A2/" class="article-date">
+  <time datetime="2020-05-28T14:31:16.723Z" itemprop="datePublished">2020-05-28</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h4 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h4><p>分析：1.查询的字段</p>
+<p>​            2.查询所需要的条件</p>
+<p>​            3.需要查询几张表</p>
+<p>一.非等值查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.语法：select 列名1，列名2 from 表1，表2</span><br><span class="line">此查询会造成大量数据冗余</span><br></pre></td></tr></table></figure>
+
+<p>二.等值查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.语法：select 列名1，列名2 from 表1，表2  加上约束条件</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h4><p>一.内连接查询</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528201813919.png" style="zoom: 80%;" /> result表</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528201950816.png" style="zoom:80%;" />subject表</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528202206131.png" style="zoom:80%;" />student表</p>
+<p>匹配规则：取的是两表的交集<br>例：查询参加了考试的同学信息（学号、学生姓名、科目编号、分数）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT s.StudentNo,s.StudentName,r.SubjectNo,r.StudentResult </span><br><span class="line">    FROM student s,result r WHERE s.StudentNo&#x3D;r.StudentNo  </span><br><span class="line">    </span><br><span class="line">    SELECT s.StudentNo,s.StudentName,r.SubjectNo,r.StudentResult </span><br><span class="line">    FROM student s INNER JOIN result r ON s.StudentNo&#x3D;r.StudentNo</span><br></pre></td></tr></table></figure>
+<ol>
+<li><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528202628613.png" style="zoom:80%;" />
+
+
+
+</li>
+</ol>
+<p>二.左外连接</p>
+<p>匹配的规则：以左表为基准，右表一一匹配，匹配不上的，左表依赖显示，右表设置为null<br>例：查询出所有同学，不考试的也查出来</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT s.StudentNo,s.StudentName,r.StudentResult,r.SubjectNo </span><br><span class="line">  FROM student s LEFT JOIN result r ON s.StudentNo&#x3D;r.StudentNo</span><br></pre></td></tr></table></figure>
+
+ <!--student表为左表，result表为右表-->
+
+<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528203551326.png" style="zoom: 50%;" />
+
+<p>三.右外连接</p>
+<p>匹配的规则：以右表为基准，左表一一匹配，匹配不上的，右表依赖显示，左表设置为null<br>例：查一下缺考的同学</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT s.StudentNo,s.StudentName,r.SubjectNo,r.StudentResult </span><br><span class="line">   FROM result r RIGHT JOIN student s ON r.StudentNo&#x3D;s.StudentNo </span><br><span class="line">       WHERE r.StudentResult IS NULL</span><br></pre></td></tr></table></figure>
+
+<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528211533116.png" style="zoom:80%;" />
+
+
+
+<p>四.子查询</p>
+<p>定义 :一个完整的查询语句 嵌套另一个完整的查询语句</p>
+<ol>
+<li><p>第一种形式 把一个子查询的结果当做另一个子查询的条件来使用</p>
+<p>例：查询参加了考试的同学信息（学号、学生姓名、科目名、分数）</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT s.studentNo,s.studentName,sub.SubjectName,r.studentResult </span><br><span class="line">	FROM student s INNER JOIN result r ON s.studentNo &#x3D; r.studentNo </span><br><span class="line">		INNER JOIN &#96;subject&#96; sub ON r.subjectNo&#x3D;sub.SubjectNo</span><br></pre></td></tr></table></figure>
+
+<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528213038051.png" style="zoom:80%;" />
+
+<p>子查询与连接查询嵌套:</p>
+<p>例：查询《数据库结构-1》的所有考试结果，并按成绩由高到低排列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT s.StudentNo,s.StudentName,r.StudentResult,sub.subjectName </span><br><span class="line">FROM student s INNER JOIN result r ON s.StudentNo&#x3D;r.StudentNo</span><br><span class="line">	INNER JOIN &#96;subject&#96; sub ON sub.subjectNo&#x3D;r.SubjectNo </span><br><span class="line">		WHERE sub.subjectName&#x3D;&quot;数据库结构-1&quot;</span><br><span class="line">			ORDER BY r.StudentResult DESC</span><br></pre></td></tr></table></figure>
+
+<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528212057106.png" style="zoom:80%;" />
+
+
+
+<p>2.第二种子查询的方式:</p>
+<p>   把子查询查询出的结果当成列来进行显示:</p>
+<p>例：查询课程为《高等数学-2》且分数不小于80分的学生的学号和姓名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT s.StudentNo,s.StudentName FROM student s WHERE s.StudentNo</span><br><span class="line">	IN(SELECT r.StudentNo FROM result r WHERE r.StudentResult&gt;&#x3D;80</span><br><span class="line">		AND r.SubjectNo IN (SELECT sub.SubjectNo FROM &#96;subject&#96; sub </span><br><span class="line">			WHERE sub.SubjectName&#x3D;&quot;高等数学-2&quot;));</span><br></pre></td></tr></table></figure>
+ <img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528213818971.png" style="zoom: 80%;"                      />   
+
+
+
+
+
+<p>总结一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;* 子查询 *&#x2F; ------------------</span><br><span class="line">    - 子查询需用括号包裹。</span><br><span class="line">-- from型</span><br><span class="line">    from后要求是一个表，必须给子查询结果取个别名。</span><br><span class="line">    - 简化每个查询内的条件。</span><br><span class="line">    - from型需将结果生成一个临时表格，可用以原表的锁定的释放。</span><br><span class="line">    - 子查询返回一个表，表型子查询。</span><br><span class="line">    select * from (select * from tb where id&gt;0) as subfrom where id&gt;1;</span><br><span class="line">    </span><br><span class="line">-- where型</span><br><span class="line">    - 子查询返回一个值，标量子查询。</span><br><span class="line">    - 不需要给子查询取别名。</span><br><span class="line">    - where子查询内的表，不能直接用以更新。</span><br><span class="line">    select * from tb where money &#x3D; (select max(money) from tb)</span><br><span class="line">    </span><br><span class="line">-- 列子查询</span><br><span class="line">        如果子查询结果返回的是一列。</span><br><span class="line">        使用 in 或 not in 完成查询</span><br><span class="line">        exists 和 not exists 条件</span><br><span class="line">            如果子查询返回数据，则返回1或0。常用于判断条件。</span><br><span class="line">            select column1 from t1 where exists (select * from t2);</span><br><span class="line">-- 行子查询</span><br><span class="line">        查询条件是一个行。</span><br><span class="line">        select * from t1 where (id, gender) in (select id, gender from t2);</span><br><span class="line">        行构造符：(col1, col2, ...) 或 ROW(col1, col2, ...)</span><br><span class="line">        行构造符通常用于与对能返回两个或两个以上列的子查询进行比较。</span><br><span class="line">        </span><br><span class="line">-- 特殊运算符</span><br><span class="line">    !&#x3D; all()    相当于 not in</span><br><span class="line">    &#x3D; some()    相当于 in。any 是 some 的别名</span><br><span class="line">    !&#x3D; some()   不等同于 not in，不等于其中某一个。</span><br><span class="line">    all, some 可以配合其他运算符一起使用。</span><br></pre></td></tr></table></figure>
+
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+  
+  
+
+</article>
     
     <article id="post-mysql" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
@@ -273,149 +410,6 @@
 
 </article>
     
-    <article id="post-a" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/05/27/a/"
-    >a</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/05/27/a/" class="article-date">
-  <time datetime="2020-05-27T12:44:35.000Z" itemprop="datePublished">2020-05-27</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-  
-  
-
-</article>
-    
-    <article id="post-hello-world" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/05/27/hello-world/"
-    >Hello World</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/05/27/hello-world/" class="article-date">
-  <time datetime="2020-05-27T12:24:56.380Z" itemprop="datePublished">2020-05-27</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-  
-  
-
-</article>
-    
   </article>
   
 
@@ -429,7 +423,7 @@
       <li>
         Copyrights &copy;
         2020
-        <i class="ri-heart-fill heart_icon"></i> John Doe
+        <i class="ri-heart-fill heart_icon"></i> Gsl
       </li>
     </ul>
     <ul>
@@ -478,7 +472,7 @@
 <nav class="navbar">
   
   <div class="logo">
-    <a href="/"><img src="/images/ayer-side.svg" alt="Hello Word"></a>
+    <a href="/"><img src="/images/ayer-side.svg" alt="Gsl&#39;s blog"></a>
   </div>
   
   <ul class="nav nav-main">
@@ -500,15 +494,15 @@
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+      <a class="nav-item-link" href="/tags/%E6%88%90%E9%95%BF/">成长</a>
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/null">摄影</a>
+      <a class="nav-item-link" href="/null">脚印</a>
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/2019/about">关于我</a>
+      <a class="nav-item-link" href="/2020/about">关于我</a>
     </li>
     
   </ul>
