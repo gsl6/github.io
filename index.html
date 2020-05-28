@@ -39,15 +39,12 @@
 
 <body>
   
+  <canvas width="1777" height="841" style="position: fixed; left: 0px; top: 0px; z-index: 999; pointer-events: none;"></canvas>
+  
   <div id="app">
     <main class="content on">
       
 <section class="cover">
-    
-      
-      <a class="forkMe" href="https://github.com/Shen-Yu/hexo-theme-ayer"
-        target="_blank"><img width="149" height="149" src="/images/forkme.png"
-          class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
     
   <div class="cover-frame">
     <div class="bg-box">
@@ -80,6 +77,201 @@
     
     
     
+    
+    <article id="post-mysql" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/05/28/mysql/"
+    >mysql</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/05/28/mysql/" class="article-date">
+  <time datetime="2020-05-28T01:57:27.221Z" itemprop="datePublished">2020-05-28</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h1 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a><strong>mysql</strong></h1><h5 id="一-创建数据库"><a href="#一-创建数据库" class="headerlink" title="一.创建数据库"></a>一.创建数据库</h5><ol>
+<li>创建一个数据库 </li>
+</ol>
+<p>​          语法:  create  database  数据库的库名</p>
+<p>   2.在创建数据库的时候给其设置编码格式 </p>
+<p>​           语法：create  database  数据库的库名  character  set  utf8</p>
+<p>   3.在创建数据库的时候 判断数据库 是否存在</p>
+<p>​          语法：create database  if not exists   数据库名</p>
+<p>   4.创建并查看数据库的结构</p>
+<p>​         语法：show  create  database  数据库的库名</p>
+<p>   5.修改数据库的编码格式</p>
+<p>​         语法： alter  database  数据库的库名  character  set gbk</p>
+<p>   6.切换到具体的某一个数据库</p>
+<p>​         语法：use  数据库的库名</p>
+<p>   7.查看所有的数据库</p>
+<p>​         语法： show  databases</p>
+<p>​    8.删库跑路</p>
+<p>​       语法： drop  database   数据库的库名</p>
+<h5 id="二-数据类型"><a href="#二-数据类型" class="headerlink" title="二.数据类型"></a>二.数据类型</h5><ol>
+<li><p>int  整形 </p>
+</li>
+<li><p>double 小数</p>
+</li>
+<li><p>char  字符串  不可以变的字符串  不管数据的多少 都会占 设置的长度  不够的使用””来代替 一般用于设置固定长度的字符型(性别 男 或者是女)</p>
+</li>
+<li><p>varchar ==&gt;可变 的字符串  根据数据来设置其长度 </p>
+</li>
+<li><p>date <!--年月日--></p>
+</li>
+<li><p>datetime  年月日 时分秒</p>
+</li>
+</ol>
+<h5 id="三-创建表"><a href="#三-创建表" class="headerlink" title="三.创建表"></a>三.创建表</h5><ol>
+<li><p>语法:</p>
+<p>   create  table  表名(</p>
+<p>​       列名1  数据类型(长度),</p>
+<p>​       列名2  数据类型(长度),</p>
+<p>​       列名3  数据类型(长度）</p>
+<p>);</p>
+<!--注意 一定要切入到对应的数据库  use  数据库的名字-->
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li>查看表创建的结构:</li>
+</ol>
+<p>​           语法： desc  表名</p>
+<ol start="3">
+<li>修改表的名字</li>
+</ol>
+<p>​           语法：alter  table  表名  rename  to  新的表名</p>
+<ol start="4">
+<li>查看当前库中所有表</li>
+</ol>
+<p>​          语法：show  tables </p>
+<ol start="5">
+<li>新增加一列</li>
+</ol>
+<p>​          语法：alter  table  表名  add  列名  数据类型(长度);</p>
+<ol start="6">
+<li>只修改数据类型 </li>
+</ol>
+<p>​           语法：alter  table  表名  modify  列名  数据类型(长度)</p>
+<ol start="7">
+<li>修改列名</li>
+</ol>
+<p>​           语法：alter  table  表名  change  原列名  新的列名 数据类型(长度)</p>
+<h5 id="四-DML语句"><a href="#四-DML语句" class="headerlink" title="四.DML语句"></a>四.DML语句</h5><h5 id="1-插入语句"><a href="#1-插入语句" class="headerlink" title="1.插入语句"></a>1.插入语句</h5><ul>
+<li><p>插入一条数据:</p>
+<p>​         语法： insert into 表名 (sid,sname,spwd,createTime)values(值1,值2，值3，值4)</p>
+</li>
+<li><p>不指定列名 按照顺序来进行插入(不常用 容易出现错误)</p>
+<p>​         语法：  insert  into  表名  values(插入的值1,插入的值2);</p>
+<p>​         注意: 必须所以的列都要插入值</p>
+</li>
+</ul>
+<ul>
+<li>插入多条数据</li>
+</ul>
+<p>​          语法:  insert  into 表名  value(第一组值),(第二组值)</p>
+<p>​           注意事项 ：</p>
+<p>​            列名必须是表名存在的  </p>
+<p>​             列名的类型与插入值的类型要对应</p>
+<p>​             插入的是事件类型 一定要加上单引号</p>
+<h5 id="2-修改"><a href="#2-修改" class="headerlink" title="2.修改"></a>2.修改</h5><ul>
+<li>修改一个列</li>
+</ul>
+<p>​            语法： update 表名  set  列名=1数据  where 条件</p>
+<ul>
+<li><p>修改多个列</p>
+<pre><code>语法：update  表名  set 列名=数据1,列名2=数据2  where  条件</code></pre></li>
+<li><p>修改表中所有的数据</p>
+<p>​             语法： update  表名  set  列名=数据1, 列名2=数据2  </p>
+</li>
+</ul>
+<h5 id="3-删除"><a href="#3-删除" class="headerlink" title="3,.删除"></a>3,.删除</h5><p>​         语法：delete  from  表名  where  条件</p>
+<p>​          删除所有的数据 ：delete  from  表名        一定要慎用</p>
+<h5 id="4-查询语句"><a href="#4-查询语句" class="headerlink" title="4.查询语句"></a>4.查询语句</h5><ul>
+<li><p>查询语句的关键子是select   from  </p>
+<p> *表示查询所有的数据,也可以根据具体的字段来查询指定的</p>
+</li>
+<li><p>去重复  DISTINCT </p>
+</li>
+<li><p>设置别名 关键字是 as  as可以给表 设置 也可以列设置  as可以省略</p>
+</li>
+<li><p>根据条件来进行查询</p>
+<p>关键字:where  or 或者 and  并且  between and  在什么范围之类 </p>
+</li>
+<li><p>模糊查询 like  % 匹配所以  _匹配一个字符</p>
+</li>
+<li><p>is  not  null  ，is  null   这里null 并不是” ”，is null是指没有插入数据</p>
+</li>
+<li><p>分页查询的关键字 limit 参数1， 参数2  参数1表示数据索引  参数2表示页量</p>
+<p>索引：（当前页-1）*页量</p>
+</li>
+<li><p>升序 与降序  order by      asc 升   desc  降</p>
+</li>
+<li><p>聚合函数   count()   sum()   max()  min()    avg()</p>
+</li>
+<li><p>分组 关键字 group  by </p>
+</li>
+<li><p>过滤使用的是 having </p>
+</li>
+<li><p>having 过滤 与where的区别  一个是分组前where  having是在分组后</p>
+</li>
+<li><p>查询语句不能随便调换位置 </p>
+</li>
+</ul>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+  
+  
+
+</article>
     
     <article id="post-a" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
@@ -236,18 +428,12 @@
     <ul>
       <li>
         Copyrights &copy;
-        2015-2020
+        2020
         <i class="ri-heart-fill heart_icon"></i> John Doe
       </li>
     </ul>
     <ul>
       <li>
-        
-        
-        
-        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
-        <span class="division">|</span>
-        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
         
       </li>
     </ul>
@@ -318,7 +504,7 @@
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="http://shenyu-vip.lofter.com" target="_blank" rel="noopener">摄影</a>
+      <a class="nav-item-link" href="/null">摄影</a>
     </li>
     
     <li class="nav-item">
@@ -388,7 +574,7 @@
 <script>
   try {
     var typed = new Typed("#subtitle", {
-      strings: ['面朝大海，春暖花开', '愿你一生努力，一生被爱', '想要的都拥有，得不到的都释怀'],
+      strings: ['栖迟於一丘，则天下不易其乐', '', ''],
       startDelay: 0,
       typeSpeed: 200,
       loop: true,
@@ -529,7 +715,15 @@
 
 <!-- ClickLove -->
 
+
+<script src="/js/clickLove.js"></script>
+
+
 <!-- ClickBoom -->
+
+
+<script src="/js/clickBoom.js"></script>
+
 
 <!-- CodeCopy -->
 
