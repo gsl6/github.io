@@ -1,130 +1,232 @@
 <!DOCTYPE html>
-
-
 <html lang="en">
 
 
+
+
+
 <head>
-  <meta charset="utf-8" />
-    
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <title>
-    多表查询和子查询 |  Gsl&#39;s blog
-  </title>
-  <meta name="generator" content="hexo-theme-ayer">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <link rel="shortcut icon" href="/favicon.ico" />
-  
-  
-<link rel="stylesheet" href="/dist/main.css">
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="keywords" content="">
+  <title>多表查询和子查询 - Gsl&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
-
-  
-<link rel="stylesheet" href="/css/custom.css">
-
-  
-  
-<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
-
-  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
 
   
 
-</head>
 
-</html>
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
 
 <body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-05-28 22:31">
+      May 28, 2020 pm
+    </time>
+  </div>
+
+
+<div class="mt-1">
   
-  <canvas width="1777" height="841" style="position: fixed; left: 0px; top: 0px; z-index: 999; pointer-events: none;"></canvas>
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      946 字
+    </span>
   
-  <div id="app">
-    <main class="content on">
-      <section class="outer">
-  <article id="post-多表查询和子查询" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
 
-  <div class="article-inner">
+  
     
-    <header class="article-header">
-       
-<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  多表查询和子查询
-</h1>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/05/28/%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%92%8C%E5%AD%90%E6%9F%A5%E8%AF%A2/" class="article-date">
-  <time datetime="2020-05-28T14:31:16.723Z" itemprop="datePublished">2020-05-28</time>
-</a>
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
       
       
-      
-<div class="word_count">
-    <span class="post-time">
-        <span class="post-meta-item-icon">
-            <i class="ri-quill-pen-line"></i>
-            <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">974</span>
-        </span>
+      12
+       分钟
     </span>
+  
 
-    <span class="post-time">
-        &nbsp; | &nbsp;
-        <span class="post-meta-item-icon">
-            <i class="ri-book-open-line"></i>
-            <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">4 min</span>
-        </span>
-    </span>
+  
+  
 </div>
 
-      
+            
+          </div>
+
+          
+        </div>
+      </div>
     </div>
+  </header>
+
+  <main>
     
-
-    
-    
-    <div class="tocbot"></div>
-
-
-
-
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
       
 
-      
-      <h4 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h4><p>分析：1.查询的字段</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h4 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h4><p>分析：1.查询的字段</p>
 <p>​            2.查询所需要的条件</p>
 <p>​            3.需要查询几张表</p>
 <p>一.非等值查询</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.语法：select 列名1，列名2 from 表1，表2</span><br><span class="line">此查询会造成大量数据冗余</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs angelscript"><span class="hljs-number">1.</span>语法：select 列名<span class="hljs-number">1</span>，列名<span class="hljs-number">2</span> <span class="hljs-keyword">from</span> 表<span class="hljs-number">1</span>，表<span class="hljs-number">2</span>
+此查询会造成大量数据冗余</code></pre>
 
 <p>二.等值查询</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.语法：select 列名1，列名2 from 表1，表2  加上约束条件</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs angelscript"><span class="hljs-number">1.</span>语法：select 列名<span class="hljs-number">1</span>，列名<span class="hljs-number">2</span> <span class="hljs-keyword">from</span> 表<span class="hljs-number">1</span>，表<span class="hljs-number">2</span>  加上约束条件</code></pre>
 
 
 
 <h4 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h4><p>一.内连接查询</p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528201813919.png" style="zoom: 80%;" /> result表</p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528201950816.png" style="zoom:80%;" />subject表</p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528202206131.png" style="zoom:80%;" />student表</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528201813919.png" srcset="/img/loading.gif" style="zoom: 80%;" /> result表</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528201950816.png" srcset="/img/loading.gif" style="zoom:80%;" />subject表</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528202206131.png" srcset="/img/loading.gif" style="zoom:80%;" />student表</p>
 <p>匹配规则：取的是两表的交集<br>例：查询参加了考试的同学信息（学号、学生姓名、科目编号、分数）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT s.StudentNo,s.StudentName,r.SubjectNo,r.StudentResult </span><br><span class="line">    FROM student s,result r WHERE s.StudentNo&#x3D;r.StudentNo  </span><br><span class="line">    </span><br><span class="line">    SELECT s.StudentNo,s.StudentName,r.SubjectNo,r.StudentResult </span><br><span class="line">    FROM student s INNER JOIN result r ON s.StudentNo&#x3D;r.StudentNo</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> s.StudentNo,s.StudentName,r.SubjectNo,r.StudentResult 
+    <span class="hljs-keyword">FROM</span> student s,<span class="hljs-keyword">result</span> r <span class="hljs-keyword">WHERE</span> s.StudentNo=r.StudentNo  
+    
+    <span class="hljs-keyword">SELECT</span> s.StudentNo,s.StudentName,r.SubjectNo,r.StudentResult 
+    <span class="hljs-keyword">FROM</span> student s <span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> <span class="hljs-keyword">result</span> r <span class="hljs-keyword">ON</span> s.StudentNo=r.StudentNo</code></pre>
 <ol>
-<li><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528202628613.png" style="zoom:80%;" />
+<li><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528202628613.png" srcset="/img/loading.gif" style="zoom:80%;" />
 
 
 
@@ -132,17 +234,20 @@
 </ol>
 <p>二.左外连接</p>
 <p>匹配的规则：以左表为基准，右表一一匹配，匹配不上的，左表依赖显示，右表设置为null<br>例：查询出所有同学，不考试的也查出来</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT s.StudentNo,s.StudentName,r.StudentResult,r.SubjectNo </span><br><span class="line">  FROM student s LEFT JOIN result r ON s.StudentNo&#x3D;r.StudentNo</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> s.StudentNo,s.StudentName,r.StudentResult,r.SubjectNo 
+  <span class="hljs-keyword">FROM</span> student s <span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> <span class="hljs-keyword">result</span> r <span class="hljs-keyword">ON</span> s.StudentNo=r.StudentNo</code></pre>
 
  <!--student表为左表，result表为右表-->
 
-<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528203551326.png" style="zoom: 50%;" />
+<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528203551326.png" srcset="/img/loading.gif" style="zoom: 50%;" />
 
 <p>三.右外连接</p>
 <p>匹配的规则：以右表为基准，左表一一匹配，匹配不上的，右表依赖显示，左表设置为null<br>例：查一下缺考的同学</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT s.StudentNo,s.StudentName,r.SubjectNo,r.StudentResult </span><br><span class="line">   FROM result r RIGHT JOIN student s ON r.StudentNo&#x3D;s.StudentNo </span><br><span class="line">       WHERE r.StudentResult IS NULL</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> s.StudentNo,s.StudentName,r.SubjectNo,r.StudentResult 
+   <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">result</span> r <span class="hljs-keyword">RIGHT</span> <span class="hljs-keyword">JOIN</span> student s <span class="hljs-keyword">ON</span> r.StudentNo=s.StudentNo 
+       <span class="hljs-keyword">WHERE</span> r.StudentResult <span class="hljs-keyword">IS</span> <span class="hljs-literal">NULL</span></code></pre>
 
-<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528211533116.png" style="zoom:80%;" />
+<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528211533116.png" srcset="/img/loading.gif" style="zoom:80%;" />
 
 
 
@@ -153,557 +258,332 @@
 <p>例：查询参加了考试的同学信息（学号、学生姓名、科目名、分数）</p>
 </li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT s.studentNo,s.studentName,sub.SubjectName,r.studentResult </span><br><span class="line">	FROM student s INNER JOIN result r ON s.studentNo &#x3D; r.studentNo </span><br><span class="line">		INNER JOIN &#96;subject&#96; sub ON r.subjectNo&#x3D;sub.SubjectNo</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs n1ql"><span class="hljs-keyword">SELECT</span> s.studentNo,s.studentName,sub.SubjectName,r.studentResult 
+	<span class="hljs-keyword">FROM</span> student s <span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> result r <span class="hljs-keyword">ON</span> s.studentNo = r.studentNo 
+		<span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> <span class="hljs-symbol">`subject`</span> sub <span class="hljs-keyword">ON</span> r.subjectNo=sub.SubjectNo</code></pre>
 
-<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528213038051.png" style="zoom:80%;" />
+<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528213038051.png" srcset="/img/loading.gif" style="zoom:80%;" />
 
 <p>子查询与连接查询嵌套:</p>
 <p>例：查询《数据库结构-1》的所有考试结果，并按成绩由高到低排列</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT s.StudentNo,s.StudentName,r.StudentResult,sub.subjectName </span><br><span class="line">FROM student s INNER JOIN result r ON s.StudentNo&#x3D;r.StudentNo</span><br><span class="line">	INNER JOIN &#96;subject&#96; sub ON sub.subjectNo&#x3D;r.SubjectNo </span><br><span class="line">		WHERE sub.subjectName&#x3D;&quot;数据库结构-1&quot;</span><br><span class="line">			ORDER BY r.StudentResult DESC</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> s.StudentNo,s.StudentName,r.StudentResult,sub.subjectName 
+<span class="hljs-keyword">FROM</span> student s <span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> <span class="hljs-keyword">result</span> r <span class="hljs-keyword">ON</span> s.StudentNo=r.StudentNo
+	<span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> <span class="hljs-string">`subject`</span> sub <span class="hljs-keyword">ON</span> sub.subjectNo=r.SubjectNo 
+		<span class="hljs-keyword">WHERE</span> sub.subjectName=<span class="hljs-string">"数据库结构-1"</span>
+			<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> r.StudentResult <span class="hljs-keyword">DESC</span></code></pre>
 
-<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528212057106.png" style="zoom:80%;" />
+<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528212057106.png" srcset="/img/loading.gif" style="zoom:80%;" />
 
 
 
 <p>2.第二种子查询的方式:</p>
 <p>   把子查询查询出的结果当成列来进行显示:</p>
 <p>例：查询课程为《高等数学-2》且分数不小于80分的学生的学号和姓名</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT s.StudentNo,s.StudentName FROM student s WHERE s.StudentNo</span><br><span class="line">	IN(SELECT r.StudentNo FROM result r WHERE r.StudentResult&gt;&#x3D;80</span><br><span class="line">		AND r.SubjectNo IN (SELECT sub.SubjectNo FROM &#96;subject&#96; sub </span><br><span class="line">			WHERE sub.SubjectName&#x3D;&quot;高等数学-2&quot;));</span><br></pre></td></tr></table></figure>
- <img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528213818971.png" style="zoom: 80%;"                      />   
+<pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> s.StudentNo,s.StudentName <span class="hljs-keyword">FROM</span> student s <span class="hljs-keyword">WHERE</span> s.StudentNo
+	<span class="hljs-keyword">IN</span>(<span class="hljs-keyword">SELECT</span> r.StudentNo <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">result</span> r <span class="hljs-keyword">WHERE</span> r.StudentResult&gt;=<span class="hljs-number">80</span>
+		<span class="hljs-keyword">AND</span> r.SubjectNo <span class="hljs-keyword">IN</span> (<span class="hljs-keyword">SELECT</span> sub.SubjectNo <span class="hljs-keyword">FROM</span> <span class="hljs-string">`subject`</span> sub 
+			<span class="hljs-keyword">WHERE</span> sub.SubjectName=<span class="hljs-string">"高等数学-2"</span>));</code></pre>
+ <img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528213818971.png" srcset="/img/loading.gif" style="zoom: 80%;"                      />   
 
 
 
 
 
 <p>总结一下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;* 子查询 *&#x2F; ------------------</span><br><span class="line">    - 子查询需用括号包裹。</span><br><span class="line">-- from型</span><br><span class="line">    from后要求是一个表，必须给子查询结果取个别名。</span><br><span class="line">    - 简化每个查询内的条件。</span><br><span class="line">    - from型需将结果生成一个临时表格，可用以原表的锁定的释放。</span><br><span class="line">    - 子查询返回一个表，表型子查询。</span><br><span class="line">    select * from (select * from tb where id&gt;0) as subfrom where id&gt;1;</span><br><span class="line">    </span><br><span class="line">-- where型</span><br><span class="line">    - 子查询返回一个值，标量子查询。</span><br><span class="line">    - 不需要给子查询取别名。</span><br><span class="line">    - where子查询内的表，不能直接用以更新。</span><br><span class="line">    select * from tb where money &#x3D; (select max(money) from tb)</span><br><span class="line">    </span><br><span class="line">-- 列子查询</span><br><span class="line">        如果子查询结果返回的是一列。</span><br><span class="line">        使用 in 或 not in 完成查询</span><br><span class="line">        exists 和 not exists 条件</span><br><span class="line">            如果子查询返回数据，则返回1或0。常用于判断条件。</span><br><span class="line">            select column1 from t1 where exists (select * from t2);</span><br><span class="line">-- 行子查询</span><br><span class="line">        查询条件是一个行。</span><br><span class="line">        select * from t1 where (id, gender) in (select id, gender from t2);</span><br><span class="line">        行构造符：(col1, col2, ...) 或 ROW(col1, col2, ...)</span><br><span class="line">        行构造符通常用于与对能返回两个或两个以上列的子查询进行比较。</span><br><span class="line">        </span><br><span class="line">-- 特殊运算符</span><br><span class="line">    !&#x3D; all()    相当于 not in</span><br><span class="line">    &#x3D; some()    相当于 in。any 是 some 的别名</span><br><span class="line">    !&#x3D; some()   不等同于 not in，不等于其中某一个。</span><br><span class="line">    all, some 可以配合其他运算符一起使用。</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs sql"><span class="hljs-comment">/* 子查询 */</span> <span class="hljs-comment">------------------</span>
+    - 子查询需用括号包裹。
+<span class="hljs-comment">-- from型</span>
+    from后要求是一个表，必须给子查询结果取个别名。
+    - 简化每个查询内的条件。
+    - from型需将结果生成一个临时表格，可用以原表的锁定的释放。
+    - 子查询返回一个表，表型子查询。
+    <span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> (<span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> tb <span class="hljs-keyword">where</span> <span class="hljs-keyword">id</span>&gt;<span class="hljs-number">0</span>) <span class="hljs-keyword">as</span> subfrom <span class="hljs-keyword">where</span> <span class="hljs-keyword">id</span>&gt;<span class="hljs-number">1</span>;
+    
+<span class="hljs-comment">-- where型</span>
+    - 子查询返回一个值，标量子查询。
+    - 不需要给子查询取别名。
+    - where子查询内的表，不能直接用以更新。
+    <span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> tb <span class="hljs-keyword">where</span> money = (<span class="hljs-keyword">select</span> <span class="hljs-keyword">max</span>(money) <span class="hljs-keyword">from</span> tb)
+    
+<span class="hljs-comment">-- 列子查询</span>
+        如果子查询结果返回的是一列。
+        使用 <span class="hljs-keyword">in</span> 或 <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> 完成查询
+        <span class="hljs-keyword">exists</span> 和 <span class="hljs-keyword">not</span> <span class="hljs-keyword">exists</span> 条件
+            如果子查询返回数据，则返回<span class="hljs-number">1</span>或<span class="hljs-number">0</span>。常用于判断条件。
+            <span class="hljs-keyword">select</span> column1 <span class="hljs-keyword">from</span> t1 <span class="hljs-keyword">where</span> <span class="hljs-keyword">exists</span> (<span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> t2);
+<span class="hljs-comment">-- 行子查询</span>
+        查询条件是一个行。
+        <span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> t1 <span class="hljs-keyword">where</span> (<span class="hljs-keyword">id</span>, gender) <span class="hljs-keyword">in</span> (<span class="hljs-keyword">select</span> <span class="hljs-keyword">id</span>, gender <span class="hljs-keyword">from</span> t2);
+        行构造符：(col1, col2, ...) 或 ROW(col1, col2, ...)
+        行构造符通常用于与对能返回两个或两个以上列的子查询进行比较。
+        
+<span class="hljs-comment">-- 特殊运算符</span>
+    != all()    相当于 not in
+    = some()    相当于 in。any 是 some 的别名
+    != some()   不等同于 not in，不等于其中某一个。
+    all, some 可以配合其他运算符一起使用。</code></pre>
 
 
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-          
-<div class="share-btn">
-      <span class="share-sns share-outer">
-        <i class="ri-share-forward-line"></i>
-        分享
-      </span>
-      <div class="share-wrap">
-        <i class="arrow"></i>
-        <div class="share-icons">
-          
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="ri-weibo-fill"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="ri-wechat-fill"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="ri-qq-fill"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="ri-douban-line"></i>
-          </a>
-          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a> -->
-          
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="ri-facebook-circle-fill"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="ri-twitter-fill"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="ri-google-fill"></i>
-          </a>
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/28/mysql/">
+                        <span class="hidden-mobile">mysql</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
         </div>
       </div>
-</div>
-
-<div class="wx-share-modal">
-    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/05/28/%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%92%8C%E5%AD%90%E6%9F%A5%E8%AF%A2/" alt="微信分享二维码">
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
 </div>
 
-<div id="share-mask"></div>
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
       
       
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
 
-    </footer>
-
+    
   </div>
 
-  
-  
-  <nav class="article-nav">
+
     
+
     
-      <a href="/2020/05/28/mysql/" class="article-nav-link">
-        <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">mysql</div>
-      </a>
-    
-  </nav>
-
-
-  
-
-  
-  
-<!-- valine评论 -->
-<div id="vcomments-box">
-    <div id="vcomments">
-    </div>
-</div>
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
-<script>
-    new Valine({
-        el: '#vcomments',
-        app_id: '',
-        app_key: '',
-        path: window.location.pathname,
-        notify: false,
-        verify: false,
-        avatar: 'monsterid',
-        placeholder: '给我的文章加点评论吧~',
-        recordIP: true
-    });
-    const infoEle = document.querySelector('#vcomments .info');
-    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
-        infoEle.childNodes.forEach(function (item) {
-            item.parentNode.removeChild(item);
-        });
-    }
-</script>
-<style>
-    #vcomments-box {
-        padding: 5px 30px;
-    }
-
-    @media screen and (max-width: 800px) {
-        #vcomments-box {
-            padding: 5px 0px;
-        }
-    }
-
-    #vcomments-box #vcomments {
-        background-color: #fff;
-    }
-
-    .v .vlist .vcard .vh {
-        padding-right: 20px;
-    }
-
-    .v .vlist .vcard {
-        padding-left: 10px;
-    }
-</style>
-
-  
-
-  
-  
-  
-  
-  
-
-</article>
-</section>
-      <footer class="footer">
-  <div class="outer">
-    <ul>
-      <li>
-        Copyrights &copy;
-        2020
-        <i class="ri-heart-fill heart_icon"></i> Gsl
-      </li>
-    </ul>
-    <ul>
-      <li>
-        
-      </li>
-    </ul>
-    <ul>
-      <li>
-        
-        
-        <span>
-  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
-  <span class="division">|</span>
-  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
-</span>
-        
-      </li>
-    </ul>
-    <ul>
-      
-    </ul>
-    <ul>
-      <li>
-        <!-- cnzz统计 -->
-        
-        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
-        
-      </li>
-    </ul>
   </div>
 </footer>
-      <div class="float_btns">
-        <div class="totop" id="totop">
-  <i class="ri-arrow-up-line"></i>
-</div>
 
-<div class="todark" id="todark">
-  <i class="ri-moon-line"></i>
-</div>
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
 
-      </div>
-    </main>
-    <aside class="sidebar on">
-      <button class="navbar-toggle"></button>
-<nav class="navbar">
+<!-- Plugins -->
+
+
   
-  <div class="logo">
-    <a href="/"><img src="/images/ayer-side.svg" alt="Gsl&#39;s blog"></a>
-  </div>
+    <script  src="/js/lazyload.js" ></script>
   
-  <ul class="nav nav-main">
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/">主页</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/archives">归档</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/categories">分类</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/tags">标签</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/tags/%E6%88%90%E9%95%BF/">成长</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/null">脚印</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/2020/about">关于我</a>
-    </li>
-    
-  </ul>
-</nav>
-<nav class="navbar navbar-bottom">
-  <ul class="nav">
-    <li class="nav-item">
-      
-      <a class="nav-item-link nav-item-search"  title="Search">
-        <i class="ri-search-line"></i>
-      </a>
-      
-      
-      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-        <i class="ri-rss-line"></i>
-      </a>
-      
-    </li>
-  </ul>
-</nav>
-<div class="search-form-wrap">
-  <div class="local-search local-search-plugin">
-  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
-  <div id="local-search-result" class="local-search-result"></div>
-</div>
-</div>
-    </aside>
-    <script>
-      if (window.matchMedia("(max-width: 768px)").matches) {
-        document.querySelector('.content').classList.remove('on');
-        document.querySelector('.sidebar').classList.remove('on');
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
       }
-    </script>
-    <div id="mask"></div>
-
-<!-- #reward -->
-<div id="reward">
-  <span class="close"><i class="ri-close-line"></i></span>
-  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
-  <div class="reward-box">
-    
-    <div class="reward-item">
-      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
-      <span class="reward-type">支付宝</span>
-    </div>
-    
-    
-    <div class="reward-item">
-      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
-      <span class="reward-type">微信</span>
-    </div>
-    
-  </div>
-</div>
-    
-<script src="/js/jquery-2.0.3.min.js"></script>
-
-
-<script src="/js/lazyload.min.js"></script>
-
-<!-- Subtitle -->
-
-<script>
-  try {
-    var typed = new Typed("#subtitle", {
-      strings: ['栖迟於一丘，则天下不易其乐', '', ''],
-      startDelay: 0,
-      typeSpeed: 200,
-      loop: true,
-      backSpeed: 100,
-      showCursor: true
     });
-  } catch (err) {
-    console.log(err)
-  }
-</script>
-
-<!-- Tocbot -->
+  </script>
 
 
-<script src="/js/tocbot.min.js"></script>
 
-<script>
-  tocbot.init({
-    tocSelector: '.tocbot',
-    contentSelector: '.article-entry',
-    headingSelector: 'h1, h2, h3, h4, h5, h6',
-    hasInnerContainers: true,
-    scrollSmooth: true,
-    scrollContainer: 'main',
-    positionFixedSelector: '.tocbot',
-    positionFixedClass: 'is-position-fixed',
-    fixedSidebarOffset: 'auto'
-  });
-</script>
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "多表查询和子查询&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
 
-<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
-<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
 
-<script src="/dist/main.js"></script>
 
-<!-- ImageViewer -->
-
-<!-- Root element of PhotoSwipe. Must have class pswp. -->
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    <!-- Background of PhotoSwipe. 
-         It's a separate element as animating opacity is faster than rgba(). -->
-    <div class="pswp__bg"></div>
-
-    <!-- Slides wrapper with overflow:hidden. -->
-    <div class="pswp__scroll-wrap">
-
-        <!-- Container that holds slides. 
-            PhotoSwipe keeps only 3 of them in the DOM to save memory.
-            Don't modify these 3 pswp__item elements, data is added later on. -->
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-
-        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-        <div class="pswp__ui pswp__ui--hidden">
-
-            <div class="pswp__top-bar">
-
-                <!--  Controls are self-explanatory. Order can be changed. -->
-
-                <div class="pswp__counter"></div>
-
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
-
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-                <!-- element will get class pswp__preloader--active when preloader is running -->
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                        <div class="pswp__preloader__cut">
-                            <div class="pswp__preloader__donut"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div>
-            </div>
-
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
-<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
-
-<script>
-    function viewer_init() {
-        let pswpElement = document.querySelectorAll('.pswp')[0];
-        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
-
-        $imgArr.forEach(($em, i) => {
-            $em.onclick = () => {
-                // slider展开状态
-                // todo: 这样不好，后面改成状态
-                if (document.querySelector('.left-col.show')) return
-                let items = []
-                $imgArr.forEach(($em2, i2) => {
-                    let img = $em2.getAttribute('data-idx', i2)
-                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
-                    let title = $em2.getAttribute('alt')
-                    // 获得原图尺寸
-                    const image = new Image()
-                    image.src = src
-                    items.push({
-                        src: src,
-                        w: image.width || $em2.width,
-                        h: image.height || $em2.height,
-                        title: title
-                    })
-                })
-                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
-                    index: parseInt(i)
-                });
-                gallery.init()
-            }
-        })
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
     }
-    viewer_init()
-</script>
-
-<!-- MathJax -->
-
-<!-- Katex -->
-
-<!-- busuanzi  -->
+    anchors.add(res.join(", "))
+  </script>
 
 
-<script src="/js/busuanzi-2.3.pure.min.js"></script>
 
-
-<!-- ClickLove -->
-
-
-<script src="/js/clickLove.js"></script>
-
-
-<!-- ClickBoom -->
-
-
-<script src="/js/clickBoom.js"></script>
-
-
-<!-- CodeCopy -->
-
-
-<link rel="stylesheet" href="/css/clipboard.css">
-
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
-<script>
-  function wait(callback, seconds) {
-    var timelag = null;
-    timelag = window.setTimeout(callback, seconds);
-  }
-  !function (e, t, a) {
-    var initCopyCode = function(){
-      var copyHtml = '';
-      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
-      copyHtml += '</button>';
-      $(".highlight .code pre").before(copyHtml);
-      $(".article pre code").before(copyHtml);
-      var clipboard = new ClipboardJS('.btn-copy', {
-        target: function(trigger) {
-          return trigger.nextElementSibling;
-        }
-      });
-      clipboard.on('success', function(e) {
-        let $btn = $(e.trigger);
-        $btn.addClass('copied');
-        let $icon = $($btn.find('i'));
-        $icon.removeClass('ri-file-copy-2-line');
-        $icon.addClass('ri-checkbox-circle-line');
-        let $span = $($btn.find('span'));
-        $span[0].innerText = 'COPIED';
-        
-        wait(function () { // 等待两秒钟后恢复
-          $icon.removeClass('ri-checkbox-circle-line');
-          $icon.addClass('ri-file-copy-2-line');
-          $span[0].innerText = 'COPY';
-        }, 2000);
-      });
-      clipboard.on('error', function(e) {
-        e.clearSelection();
-        let $btn = $(e.trigger);
-        $btn.addClass('copy-failed');
-        let $icon = $($btn.find('i'));
-        $icon.removeClass('ri-file-copy-2-line');
-        $icon.addClass('ri-time-line');
-        let $span = $($btn.find('span'));
-        $span[0].innerText = 'COPY FAILED';
-        
-        wait(function () { // 等待两秒钟后恢复
-          $icon.removeClass('ri-time-line');
-          $icon.addClass('ri-file-copy-2-line');
-          $span[0].innerText = 'COPY';
-        }, 2000);
-      });
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
     }
-    initCopyCode();
-  }(window, document);
-</script>
+  </script>
 
 
 
-    
-  </div>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
-
 </html>
