@@ -138,7 +138,7 @@
 </nav>
 
     <div class="view intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+         style="background: url('/img/blny.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -215,11 +215,11 @@
 <p>​            2.查询所需要的条件</p>
 <p>​            3.需要查询几张表</p>
 <p>一.非等值查询</p>
-<pre><code class="hljs angelscript"><span class="hljs-number">1.</span>语法：select 列名<span class="hljs-number">1</span>，列名<span class="hljs-number">2</span> <span class="hljs-keyword">from</span> 表<span class="hljs-number">1</span>，表<span class="hljs-number">2</span>
-此查询会造成大量数据冗余</code></pre>
+<div class="hljs"><pre><code class="hljs angelscript"><span class="hljs-number">1.</span>语法：select 列名<span class="hljs-number">1</span>，列名<span class="hljs-number">2</span> <span class="hljs-keyword">from</span> 表<span class="hljs-number">1</span>，表<span class="hljs-number">2</span>
+此查询会造成大量数据冗余</code></pre></div>
 
 <p>二.等值查询</p>
-<pre><code class="hljs angelscript"><span class="hljs-number">1.</span>语法：select 列名<span class="hljs-number">1</span>，列名<span class="hljs-number">2</span> <span class="hljs-keyword">from</span> 表<span class="hljs-number">1</span>，表<span class="hljs-number">2</span>  加上约束条件</code></pre>
+<div class="hljs"><pre><code class="hljs angelscript"><span class="hljs-number">1.</span>语法：select 列名<span class="hljs-number">1</span>，列名<span class="hljs-number">2</span> <span class="hljs-keyword">from</span> 表<span class="hljs-number">1</span>，表<span class="hljs-number">2</span>  加上约束条件</code></pre></div>
 
 
 
@@ -228,11 +228,11 @@
 <p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528201950816.png" srcset="/img/loading.gif" style="zoom:80%;" />subject表</p>
 <p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528202206131.png" srcset="/img/loading.gif" style="zoom:80%;" />student表</p>
 <p>匹配规则：取的是两表的交集<br>例：查询参加了考试的同学信息（学号、学生姓名、科目编号、分数）</p>
-<pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> s.StudentNo,s.StudentName,r.SubjectNo,r.StudentResult 
+<div class="hljs"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> s.StudentNo,s.StudentName,r.SubjectNo,r.StudentResult 
     <span class="hljs-keyword">FROM</span> student s,<span class="hljs-keyword">result</span> r <span class="hljs-keyword">WHERE</span> s.StudentNo=r.StudentNo  
     
     <span class="hljs-keyword">SELECT</span> s.StudentNo,s.StudentName,r.SubjectNo,r.StudentResult 
-    <span class="hljs-keyword">FROM</span> student s <span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> <span class="hljs-keyword">result</span> r <span class="hljs-keyword">ON</span> s.StudentNo=r.StudentNo</code></pre>
+    <span class="hljs-keyword">FROM</span> student s <span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> <span class="hljs-keyword">result</span> r <span class="hljs-keyword">ON</span> s.StudentNo=r.StudentNo</code></pre></div>
 <ol>
 <li><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528202628613.png" srcset="/img/loading.gif" style="zoom:80%;" />
 
@@ -242,8 +242,8 @@
 </ol>
 <p>二.左外连接</p>
 <p>匹配的规则：以左表为基准，右表一一匹配，匹配不上的，左表依赖显示，右表设置为null<br>例：查询出所有同学，不考试的也查出来</p>
-<pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> s.StudentNo,s.StudentName,r.StudentResult,r.SubjectNo 
-  <span class="hljs-keyword">FROM</span> student s <span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> <span class="hljs-keyword">result</span> r <span class="hljs-keyword">ON</span> s.StudentNo=r.StudentNo</code></pre>
+<div class="hljs"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> s.StudentNo,s.StudentName,r.StudentResult,r.SubjectNo 
+  <span class="hljs-keyword">FROM</span> student s <span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> <span class="hljs-keyword">result</span> r <span class="hljs-keyword">ON</span> s.StudentNo=r.StudentNo</code></pre></div>
 
  <!--student表为左表，result表为右表-->
 
@@ -251,9 +251,9 @@
 
 <p>三.右外连接</p>
 <p>匹配的规则：以右表为基准，左表一一匹配，匹配不上的，右表依赖显示，左表设置为null<br>例：查一下缺考的同学</p>
-<pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> s.StudentNo,s.StudentName,r.SubjectNo,r.StudentResult 
+<div class="hljs"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> s.StudentNo,s.StudentName,r.SubjectNo,r.StudentResult 
    <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">result</span> r <span class="hljs-keyword">RIGHT</span> <span class="hljs-keyword">JOIN</span> student s <span class="hljs-keyword">ON</span> r.StudentNo=s.StudentNo 
-       <span class="hljs-keyword">WHERE</span> r.StudentResult <span class="hljs-keyword">IS</span> <span class="hljs-literal">NULL</span></code></pre>
+       <span class="hljs-keyword">WHERE</span> r.StudentResult <span class="hljs-keyword">IS</span> <span class="hljs-literal">NULL</span></code></pre></div>
 
 <img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528211533116.png" srcset="/img/loading.gif" style="zoom:80%;" />
 
@@ -266,19 +266,19 @@
 <p>例：查询参加了考试的同学信息（学号、学生姓名、科目名、分数）</p>
 </li>
 </ol>
-<pre><code class="hljs n1ql"><span class="hljs-keyword">SELECT</span> s.studentNo,s.studentName,sub.SubjectName,r.studentResult 
+<div class="hljs"><pre><code class="hljs n1ql"><span class="hljs-keyword">SELECT</span> s.studentNo,s.studentName,sub.SubjectName,r.studentResult 
 	<span class="hljs-keyword">FROM</span> student s <span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> result r <span class="hljs-keyword">ON</span> s.studentNo = r.studentNo 
-		<span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> <span class="hljs-symbol">`subject`</span> sub <span class="hljs-keyword">ON</span> r.subjectNo=sub.SubjectNo</code></pre>
+		<span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> <span class="hljs-symbol">`subject`</span> sub <span class="hljs-keyword">ON</span> r.subjectNo=sub.SubjectNo</code></pre></div>
 
 <img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528213038051.png" srcset="/img/loading.gif" style="zoom:80%;" />
 
 <p>子查询与连接查询嵌套:</p>
 <p>例：查询《数据库结构-1》的所有考试结果，并按成绩由高到低排列</p>
-<pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> s.StudentNo,s.StudentName,r.StudentResult,sub.subjectName 
+<div class="hljs"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> s.StudentNo,s.StudentName,r.StudentResult,sub.subjectName 
 <span class="hljs-keyword">FROM</span> student s <span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> <span class="hljs-keyword">result</span> r <span class="hljs-keyword">ON</span> s.StudentNo=r.StudentNo
 	<span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> <span class="hljs-string">`subject`</span> sub <span class="hljs-keyword">ON</span> sub.subjectNo=r.SubjectNo 
 		<span class="hljs-keyword">WHERE</span> sub.subjectName=<span class="hljs-string">"数据库结构-1"</span>
-			<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> r.StudentResult <span class="hljs-keyword">DESC</span></code></pre>
+			<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> r.StudentResult <span class="hljs-keyword">DESC</span></code></pre></div>
 
 <img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528212057106.png" srcset="/img/loading.gif" style="zoom:80%;" />
 
@@ -287,10 +287,10 @@
 <p>2.第二种子查询的方式:</p>
 <p>   把子查询查询出的结果当成列来进行显示:</p>
 <p>例：查询课程为《高等数学-2》且分数不小于80分的学生的学号和姓名</p>
-<pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> s.StudentNo,s.StudentName <span class="hljs-keyword">FROM</span> student s <span class="hljs-keyword">WHERE</span> s.StudentNo
+<div class="hljs"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> s.StudentNo,s.StudentName <span class="hljs-keyword">FROM</span> student s <span class="hljs-keyword">WHERE</span> s.StudentNo
 	<span class="hljs-keyword">IN</span>(<span class="hljs-keyword">SELECT</span> r.StudentNo <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">result</span> r <span class="hljs-keyword">WHERE</span> r.StudentResult&gt;=<span class="hljs-number">80</span>
 		<span class="hljs-keyword">AND</span> r.SubjectNo <span class="hljs-keyword">IN</span> (<span class="hljs-keyword">SELECT</span> sub.SubjectNo <span class="hljs-keyword">FROM</span> <span class="hljs-string">`subject`</span> sub 
-			<span class="hljs-keyword">WHERE</span> sub.SubjectName=<span class="hljs-string">"高等数学-2"</span>));</code></pre>
+			<span class="hljs-keyword">WHERE</span> sub.SubjectName=<span class="hljs-string">"高等数学-2"</span>));</code></pre></div>
  <img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528213818971.png" srcset="/img/loading.gif" style="zoom: 80%;"                      />   
 
 
@@ -298,7 +298,7 @@
 
 
 <p>总结一下：</p>
-<pre><code class="hljs sql"><span class="hljs-comment">/* 子查询 */</span> <span class="hljs-comment">------------------</span>
+<div class="hljs"><pre><code class="hljs sql"><span class="hljs-comment">/* 子查询 */</span> <span class="hljs-comment">------------------</span>
     - 子查询需用括号包裹。
 <span class="hljs-comment">-- from型</span>
     from后要求是一个表，必须给子查询结果取个别名。
@@ -329,7 +329,7 @@
     != all()    相当于 not in
     = some()    相当于 in。any 是 some 的别名
     != some()   不等同于 not in，不等于其中某一个。
-    all, some 可以配合其他运算符一起使用。</code></pre>
+    all, some 可以配合其他运算符一起使用。</code></pre></div>
 
 
             </article>
@@ -346,6 +346,12 @@
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
+                    
+                      <a href="/2020/05/31/jdbc/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">jdbc</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </div>
                   <div class="post-next col-6">
@@ -421,12 +427,12 @@
 
   <footer class="mt-5">
   <div class="text-center py-3">
-    <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+   <!-- <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>hexo</span></a>
       <i class="iconfont icon-love"></i>
       <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
         <span>Fluid</span></a>
-    </div>
+    </div>-->
     
   <div class="statistics">
     
@@ -458,38 +464,49 @@
 
     
 
-    <span id="timeDate">载入天数...</span>
-    <span id="times">载入时分秒...</span>
-    <script>
-      var now=new Date();
-      function createtime() {
-        var grt=new Date("05/27/2020 00:00:00");
-        now.setTime(now.getTime()+250);
-        days=(now-grt) /1000 /60/ 60/24;
-        dnum=Math.floor(days);
-        hours=(now-grt) /1000 /60/60-(24*dnum);
-        hnum=Math.floor(hours);
-        if(String(hnum).length==1){
-          hnum="0"+hnum;
-        }
-        minutes=(now-grt)/1000/60-(24*60*dnum)-(60*hnum);
-        mnum=Math.floor(minutes);
-        if(String(num).length==1){
-          num="0"+mnum;
-        }
-        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
-        snum = Math.round(seconds);
-        if(String(snum).length ==1 ){
-          snum = "0" + snum;
-        }
-        document.getElementById("timeDate").innerHTML = "本站安全运行&nbsp"+dnum+"&nbsp天";
-        document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
-      }
-      setInterval("createtime()",250);
-    </script>
+    <span id="sitetime"></span>
+    <script language=javascript>
 
 
-<!--    <p id="hitokoto">:D 获取中...</p>
+      function siteTime(){
+        window.setTimeout("siteTime()", 1000);
+        var seconds = 1000
+        var minutes = seconds * 60
+        var hours = minutes * 60
+        var days = hours * 24
+        var years = days * 365
+        var today = new Date()
+        var todayYear = today.getFullYear()
+        var todayMonth = today.getMonth()
+        var todayDate = today.getDate()
+        var todayHour = today.getHours()
+        var todayMinute = today.getMinutes()
+        var todaySecond = today.getSeconds()
+
+        /* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+        year - 作为date对象的年份，为4位年份值
+        month - 0-11之间的整数，做为date对象的月份    特别注意
+        day - 1-31之间的整数，做为date对象的天数
+        hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+        minutes - 0-59之间的整数，做为date对象的分钟数
+        seconds - 0-59之间的整数，做为date对象的秒数
+        microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+        var t1 = Date.UTC(2020,4,30,0o0,0o0,0o0)  /*<!--注意：月份是0-11,所以需要把建站月份减一-->*/
+        var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond)
+        var diff = t2-t1
+
+        var diffYears = Math.floor(diff/years)
+        var diffDays = Math.floor((diff/days)-diffYears*365)
+        var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours)
+        var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes)
+        var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds)
+        document.getElementById("sitetime").innerHTML="本站安全运行 "+diffYears+" 年 "+diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒"
+        siteTime()}
+      </script>
+
+
+
+    <p id="hitokoto">:D 获取中...</p>
     <script>
       fetch('https://v1.hitokoto.cn')
               .then(response => response.json())
@@ -498,7 +515,7 @@
                 hitokoto.innerText = data.hitokoto
               })
               .catch(console.error)
-    </script>-->
+    </script>
   </div>
 </footer>
 
@@ -620,7 +637,97 @@
 
 
 
+  
 
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js" ></script>
+
+  
+
+
+
+  
+  
+    <script>
+      !function (e, t, a) {
+        function r() {
+          for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x + "px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e].scale + ") rotate(45deg);background:" + s[e].color + ";z-index:99999");
+          requestAnimationFrame(r)
+        }
+
+        function n() {
+          var t = "function" == typeof e.onclick && e.onclick;
+          e.onclick = function (e) {
+            t && t(), o(e)
+          }
+        }
+
+        function o(e) {
+          var a = t.createElement("div");
+          a.className = "heart", s.push({
+            el: a,
+            x: e.clientX - 5,
+            y: e.clientY - 5,
+            scale: 1,
+            alpha: 1,
+            color: c()
+          }), t.body.appendChild(a)
+        }
+
+        function i(e) {
+          var a = t.createElement("style");
+          a.type = "text/css";
+          try {
+            a.appendChild(t.createTextNode(e))
+          } catch (t) {
+            a.styleSheet.cssText = e
+          }
+          t.getElementsByTagName("head")[0].appendChild(a)
+        }
+
+        function c() {
+          return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+        }
+
+        var s = [];
+        e.requestAnimationFrame = e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame || function (e) {
+          setTimeout(e, 1e3 / 60)
+        }, i(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"), n(), r()
+      }(window, document);
+    </script>
+  
 
 
 

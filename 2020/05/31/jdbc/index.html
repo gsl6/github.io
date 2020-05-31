@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="keywords" content="">
+  <title>jdbc - Gsl&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>瑟瑟发抖小萌新</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/blny.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-05-31 22:28">
+      May 31, 2020 pm
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      27
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-post-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-post-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <div class="hljs"><pre><code class="hljs subunit">title: JDBC
+date: 2020<span class="hljs-string">-05</span><span class="hljs-string">-31</span> 22:30:00
+<span class="hljs-keyword">tags:</span>Database</code></pre></div>
+
+
+
+<h4 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC:"></a>JDBC:</h4><p>官方定义的一套操作所有关系型数据库的规则（接口）；各个数据库产商去实现这个接口，提供数据库驱动</p>
+<p>jar包，我们可以使用这套接口编程，真正执行的代码是驱动jar包中的实现类</p>
+<h4 id="JDBC的操作做步骤"><a href="#JDBC的操作做步骤" class="headerlink" title="JDBC的操作做步骤"></a>JDBC的操作做步骤</h4><ol>
+<li><p>新建一个名为lib的文件夹，用于存放jar包</p>
+</li>
+<li><p>下载驱动包：<a href="https://dev.mysql.com/downloads/connector/j/5.1.html" target="_blank" rel="noopener">https://dev.mysql.com/downloads/connector/j/5.1.html</a></p>
+</li>
+<li><p>添加项目依赖：选中lib目录下的jar包右击-&gt;Add as library-&gt;设置添加的驱动名字</p>
+</li>
+<li><p>验证添加依赖是否成功：file-&gt;Project Structure-&gt;Libraries,选中之后看右边是否出现刚才添加的jar包</p>
+</li>
+</ol>
+<h4 id="JDBC开发流程"><a href="#JDBC开发流程" class="headerlink" title="JDBC开发流程"></a>JDBC开发流程</h4><ol>
+<li><p>通过反射来加载驱动包</p>
+</li>
+<li><p>使用DeriverManger来获取连接对象</p>
+</li>
+<li><p>获取可以执行的SQL语句的对象statement</p>
+</li>
+<li><p>执行SQL语句</p>
+</li>
+<li><p>得到返回的结果</p>
+</li>
+<li><p>释放资源</p>
+<div class="hljs"><pre><code class="hljs gradle">      
+      <span class="hljs-keyword">import</span> com.mysql.jdbc.Driver;
+      <span class="hljs-keyword">import</span> java.sql.*;
+      <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> test &#123;
+          <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> main(String[] args) &#123;
+              Connection con=<span class="hljs-keyword">null</span>;
+              Statement sta=<span class="hljs-keyword">null</span>;
+              ResultSet re=<span class="hljs-keyword">null</span>;
+              <span class="hljs-keyword">try</span> &#123;
+                  <span class="hljs-keyword">Class</span>.forName(<span class="hljs-string">"com.mysql.jdbc.Driver"</span>);  <span class="hljs-comment">//通过反射来加载驱动</span>
+                  <span class="hljs-comment">//获取与数据库的连接对象con</span>
+                  con=DriverManager.getConnection(<span class="hljs-string">"jdbc:mysql://localhost:3306/student?characterEncoding=utf-8"</span>,<span class="hljs-string">"root"</span>,<span class="hljs-string">"123"</span>);
+                  sta=con.createStatement();<span class="hljs-comment">//通过连接对象得到SQL的执行对象sta</span>
+                   re=sta.executeQuery(<span class="hljs-string">"selet *from user"</span>);<span class="hljs-comment">//执行SQL语句，得到执行结果集</span>
+                  <span class="hljs-keyword">while</span>(re.<span class="hljs-keyword">next</span>())&#123;                           <span class="hljs-comment">//遍历结果集得到数据</span>
+                      <span class="hljs-keyword">int</span> uid=re.getInt(<span class="hljs-string">"uid"</span>);
+                      String uname=re.getString(<span class="hljs-string">"uname"</span>);
+                      String upwd=re.getString(<span class="hljs-string">"upwd"</span>);
+                      System.out.<span class="hljs-keyword">println</span>(uid+<span class="hljs-string">"\t"</span>+uname+<span class="hljs-string">"\t"</span>+upwd);
+                  &#125;
+              &#125; <span class="hljs-keyword">catch</span> (ClassNotFoundException e) &#123;
+                  e.printStackTrace();
+              &#125; <span class="hljs-keyword">catch</span> (SQLException e) &#123;
+                  e.printStackTrace();
+              &#125;<span class="hljs-keyword">finally</span> &#123;    <span class="hljs-comment">//关闭资源，先调用的先关闭，关闭前判断对象是否存在</span>
+                  <span class="hljs-keyword">try</span> &#123;
+                      <span class="hljs-keyword">if</span>(re !=<span class="hljs-keyword">null</span>)&#123;
+                          con.close();
+                      &#125;
+                      <span class="hljs-keyword">if</span>(sta !=<span class="hljs-keyword">null</span>)&#123;
+                          sta.close();
+                      &#125;
+                      <span class="hljs-keyword">if</span>(con !=<span class="hljs-keyword">null</span>)&#123;
+                          re.close();
+                      &#125;
+                  &#125; <span class="hljs-keyword">catch</span> (SQLException e) &#123;
+                      e.printStackTrace();
+                  &#125;
+              &#125;
+          &#125;
+      &#125;
+      <span class="hljs-comment">/*</span>
+<span class="hljs-comment">Class.forName(“com.mysql.jdbc.Driver”); 通过反射来加载驱动 Driver ==&gt;驱动类</span>
+<span class="hljs-comment">      DriverManager 驱动管理对象来获取连接对象 getConnection(“url”,“username”,“password”) =》返回值就是 Connection</span>
+<span class="hljs-comment">      url==&gt;表示连接数据库的地址 jdbc:mysql://localhost:3306/数据库的库名?characterEncoding=utf-8 || jdbc:mysql:///day03_db 只支持本地连接</span>
+<span class="hljs-comment">      jdbc: 表示主的协议==&gt;也就是使用jdbc来连接数据库</span>
+<span class="hljs-comment">      mysql: 表示子协议==&gt;也及时使用mysql数据库</span>
+<span class="hljs-comment">      localhost: 表示本机的ip地址</span>
+<span class="hljs-comment">      3306 表示mysql数据库的端口号，端口号后是数据库的库ming</span>
+<span class="hljs-comment">      ? 后都是表示设置的参数 characterEncoding=utf-8 ==&gt;设置其编码格式</span>
+<span class="hljs-comment">      username:表示数据库的用户名</span>
+<span class="hljs-comment">      password 表示数据库 密码</span>
+<span class="hljs-comment">      conn.createStatement(); ==&gt;表示通过连接对象来获取执行sql 的对象Statement</span>
+<span class="hljs-comment">      sta.executeQuery(sql) 发送sql语句，数据库返回一个结果集 ResultSet</span>
+<span class="hljs-comment">      关闭资源(从下往上关闭)</span>
+<span class="hljs-comment">      */</span></code></pre></div>
+
+
+
+
+
+
+</li>
+</ol>
+<h4 id="Jdbc中用到的对象"><a href="#Jdbc中用到的对象" class="headerlink" title="Jdbc中用到的对象"></a>Jdbc中用到的对象</h4><h5 id="1-DriverManager对象：驱动管理对象"><a href="#1-DriverManager对象：驱动管理对象" class="headerlink" title="1.DriverManager对象：驱动管理对象"></a>1.DriverManager对象：驱动管理对象</h5><p>功能;</p>
+<ul>
+<li><p>注册驱动：告诉程序使用哪一个数据库驱动jar;  mysql5之后的驱动jar包可以省略注册驱动的步骤</p>
+</li>
+<li><p>获取数据库连接</p>
+</li>
+</ul>
+<h5 id="2-Connection对象"><a href="#2-Connection对象" class="headerlink" title="2.Connection对象"></a>2.Connection对象</h5><div class="hljs"><pre><code>作用：完成客服端与数据库的交互
+
+常用的方法：</code></pre></div><p>​          1).获取执行sql对象</p>
+<ul>
+<li>createStatement()          //创建向数据库发送sql的statement对象                        </li>
+</ul>
+<ul>
+<li><p>prepareStatement(sql)  //创建向数据库发送预编译sql的PrepareSatment对象</p>
+</li>
+<li><p>prepareCall(sql)     //创建执行存储过程的callableStatement对象</p>
+<p>2).管理事务：</p>
+</li>
+<li><p>setAutoCommit(boolean autoCommit)  //设置事务自动提交</p>
+</li>
+<li><p>commit()  //提交事务</p>
+</li>
+<li><p>rollback()  //回滚事务</p>
+<p>​    </p>
+</li>
+</ul>
+<h5 id="3-Statement对象"><a href="#3-Statement对象" class="headerlink" title="3.Statement对象"></a>3.Statement对象</h5><p>   作用：用于向数据库发送sql语句，对数据库的增删改查都可以通过此对象发送sql语句完成</p>
+<p>   常用的方法:</p>
+<ul>
+<li><p>executeQuery(String sql)        //执行DQL(SELECT)语句 </p>
+</li>
+<li><p>executeUpdate(String sql)  //执行DML语句（增删改），返回值是影响的行数(可以判断DML语句是否执行成功)</p>
+</li>
+<li><p>addBatch(String  sql)   //把多条sql语句放进同一个批处理中</p>
+</li>
+<li><p>executeBatch()      //向数据库发送一批sql语句执行     </p>
+</li>
+</ul>
+<h5 id="4-ResultSet对象"><a href="#4-ResultSet对象" class="headerlink" title="4.ResultSet对象"></a>4.ResultSet对象</h5><p>作用：ResultSet对象代表sql语句的执行结果，当Statement执行executeQuery()时会返回一个ResultSet对象</p>
+<p> ResultSet对象维护了⼀个数据⾏的游标，调⽤ResultSet.next()⽅法可以让游标指向具体的数据⾏，进⾏获取该⾏ 的数据</p>
+<p>常用方法：</p>
+<ul>
+<li><p>getObject(String str)     //获取任意类型的数据</p>
+</li>
+<li><p>getString(String str)    //获取指定类型的数据</p>
+</li>
+</ul>
+<p>//对结果集进行滚动查看的方法</p>
+<ul>
+<li><p>next()    //游标向下移动一行</p>
+</li>
+<li><p>Previous()</p>
+</li>
+<li><p>absolute(int row)</p>
+</li>
+<li><p>beforeFirst()</p>
+</li>
+<li><p>afterLast()</p>
+</li>
+</ul>
+<h5 id="5-PreparedStatement对象"><a href="#5-PreparedStatement对象" class="headerlink" title="5.PreparedStatement对象"></a>5.PreparedStatement对象</h5><p>  PreparedStatement对象继承Statement对象</p>
+<p>作用：</p>
+<ul>
+<li><p>Statement对象编译SQL语句时，如果SQL语句有变量，就需要使⽤分隔符来隔开，如果变量⾮常</p>
+<p> 多，就会使SQL变得⾮常复杂，PreparedStatement可以使⽤占位符，简化sql的编写</p>
+</li>
+<li><p>Statement会频繁编译SQL。PreparedStatement可对SQL进⾏预编译，提⾼效率，预编译的<br> SQL存储在PreparedStatement对象中</p>
+</li>
+<li><p>PreparedStatement防⽌SQL注⼊。Statement通过分隔符’++’,编写永等式，可以不需要密码<br> 就进⼊数据库</p>
+</li>
+</ul>
+<div class="hljs"><pre><code class="hljs routeros">  try &#123;
+        Class.forName(<span class="hljs-string">"com.mysql.jdbc.Driver"</span>);
+       <span class="hljs-built_in"> Connection </span><span class="hljs-attribute">con</span>=DriverManager.getConnection("jdbc:mysql://localhost:3306/student?characterEncoding=utf-8","root","123");
+        String <span class="hljs-attribute">sql</span>=<span class="hljs-string">"insert into user(uid,uname,upwd)values(?,?,?)"</span>;
+        PreparedStatement <span class="hljs-attribute">ps</span>=con.prepareStatement(sql);
+        ps.setString(1,<span class="hljs-string">"1"</span>);
+    &#125; catch (ClassNotFoundException e) &#123;
+        e.printStackTrace();
+    &#125; catch (SQLException e) &#123;
+        e.printStackTrace();
+    &#125;
+&#125;</code></pre></div>
+
+<p>解析:</p>
+<ul>
+<li>给其占位符来进行赋值  setInt(index,data) setString(index,data)<br>第一个参数表示设置索引 索引是从1开始<br>第二个参数表示 具体的赋值</li>
+</ul>
+<h4 id="Junit-测试"><a href="#Junit-测试" class="headerlink" title="Junit 测试"></a>Junit 测试</h4><p>   主要是用于测试代码<br>             使用步骤：</p>
+<ul>
+<li><p>.导包 添加依赖</p>
+</li>
+<li><p>编写一个测试方法(不是main)<br> 注意点:<br> 需要使用public void<br> 这个方法没有返回值<br> 这个方法没有参数</p>
+</li>
+<li><p>在方法加注解 @Test</p>
+ <div class="hljs"><pre><code class="hljs aspectj"><span class="hljs-meta">@Test</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">void</span>  <span class="hljs-title">test</span><span class="hljs-params">()</span></span>&#123;
+        
+&#125;</code></pre></div>
+
+
+
+</li>
+</ul>
+<ul>
+<li>直接运行 绿色表示没有错误 红色表示产生了错误</li>
+</ul>
+<h4 id="Jdbc配置文件读取的封装"><a href="#Jdbc配置文件读取的封装" class="headerlink" title="Jdbc配置文件读取的封装****"></a>Jdbc配置文件读取的封装****</h4>  <div class="hljs"><pre><code class="hljs arduino"><span class="hljs-keyword">import</span> java.io.IOException;
+<span class="hljs-keyword">import</span> java.io.InputStream;
+<span class="hljs-keyword">import</span> java.util.Properties;
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">JdbcUtils</span> &#123;</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> JdbcUtils jdbcUtils;<span class="hljs-comment">//私有的属性，私有的构造</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">JdbcUtils</span><span class="hljs-params">()</span></span>&#123;              <span class="hljs-comment">//保证外部类不能实例化这个对象</span>
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> synchronized JdbcUtils <span class="hljs-title">getJdbcUtils</span><span class="hljs-params">()</span></span>&#123;  <span class="hljs-comment">//定义方法来实例化这个类</span>
+        <span class="hljs-keyword">if</span>(jdbcUtils==null)&#123;
+            jdbcUtils=<span class="hljs-keyword">new</span> JdbcUtils();
+        &#125;
+        <span class="hljs-keyword">return</span> jdbcUtils;
+    &#125;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Properties properties;
+    <span class="hljs-keyword">static</span>&#123;
+        <span class="hljs-keyword">try</span> &#123;
+            properties=<span class="hljs-keyword">new</span> Properties();
+            InputStream fis=JdbcUtils.class.getResourceAsStream(<span class="hljs-string">"database.properties"</span>);<span class="hljs-comment">//通过类加载器来记载资源文件</span>
+            properties.load(fis);  <span class="hljs-comment">//当前文件 的内容已经加载到properties对象，调用properties对象就可以获得其内容</span>
+        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> <span class="hljs-title">getValues</span><span class="hljs-params">(<span class="hljs-keyword">String</span> key)</span></span>&#123;  <span class="hljs-comment">//通过键值来获取，类似于hashMap对象</span>
+        <span class="hljs-keyword">return</span> properties.getProperty(key);
+    &#125;
+&#125;</code></pre></div>
+
+
+
+
+
+
+<h4 id="jdbc的封装"><a href="#jdbc的封装" class="headerlink" title="jdbc的封装"></a><strong>jdbc的封装</strong></h4><p>1.加载驱动（只需要加载一次，写在静态代码块中)</p>
+<p>2.获取连接对象写成一个方法 (三个参数写成常量)</p>
+<p>3.增删改</p>
+<p>4.查询</p>
+<p>5.关闭资源</p>
+<div class="hljs"><pre><code class="hljs reasonml">import com.mysql.jdbc.ResultSet;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+public <span class="hljs-keyword">class</span> BaseDao &#123;
+    public  Connection get<span class="hljs-constructor">Connection()</span> &#123;  <span class="hljs-comment">//此方法用于连接对象</span>
+        Connection conn = null;
+        <span class="hljs-keyword">try</span> &#123;
+            <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Class</span>.</span></span>for<span class="hljs-constructor">Name(JdbcUtils.<span class="hljs-params">getJdbcUtils</span>()</span>.get<span class="hljs-constructor">Values(<span class="hljs-string">"jdbc.driver"</span>)</span>);
+            conn = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">DriverManager</span>.</span></span>get<span class="hljs-constructor">Connection(JdbcUtils.<span class="hljs-params">getJdbcUtils</span>()</span>.get<span class="hljs-constructor">Values(<span class="hljs-string">"jdbc.url"</span>)</span>,
+                    <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">JdbcUtils</span>.</span></span>get<span class="hljs-constructor">JdbcUtils()</span>.get<span class="hljs-constructor">Values(<span class="hljs-string">"jdbc.username"</span>)</span>,
+                    <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">JdbcUtils</span>.</span></span>get<span class="hljs-constructor">JdbcUtils()</span>.get<span class="hljs-constructor">Values(<span class="hljs-string">"jdbc.password"</span>)</span>);
+        &#125; catch (ClassNotFoundException e) &#123;
+            e.print<span class="hljs-constructor">StackTrace()</span>;
+        &#125; catch (SQLException e) &#123;
+            e.print<span class="hljs-constructor">StackTrace()</span>;
+        &#125;
+        return conn;
+    &#125;
+    public <span class="hljs-built_in">int</span> update(String sql, Object<span class="hljs-literal">[]</span> objects) &#123;
+        <span class="hljs-built_in">int</span> num = -<span class="hljs-number">1</span>;
+        Connection con = null;
+        PreparedStatement ps = null;
+        <span class="hljs-keyword">try</span> &#123;
+            con = get<span class="hljs-constructor">Connection()</span>;<span class="hljs-comment">//获取连接对象</span>
+            ps = con.prepare<span class="hljs-constructor">Statement(<span class="hljs-params">sql</span>)</span>;<span class="hljs-comment">//执行得到的SQL对象</span>
+            <span class="hljs-keyword">if</span> (objects != null<span class="hljs-operator"> &amp;&amp; </span>objects.length &gt; <span class="hljs-number">0</span>) &#123;<span class="hljs-comment">//非空验证，判断是否需要拼接占位符</span>
+                for (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; objects.length; i++) &#123;
+                    ps.set<span class="hljs-constructor">Object((<span class="hljs-params">i</span> + 1)</span>, objects<span class="hljs-literal">[<span class="hljs-identifier">i</span>]</span>);<span class="hljs-comment">//给占位符一个个对应赋值</span>
+                &#125;
+            &#125;
+            num = ps.execute<span class="hljs-constructor">Update()</span>;
+        &#125; catch (SQLException e) &#123;
+            e.print<span class="hljs-constructor">StackTrace()</span>;
+        &#125; finally &#123;
+            close(null, ps, con);
+        &#125;
+        return num;
+    &#125;
+    public ResultSet select<span class="hljs-constructor">All(String <span class="hljs-params">sql</span>,Object[] <span class="hljs-params">objects</span>)</span>&#123;
+        ResultSet rs= null;
+        <span class="hljs-keyword">try</span> &#123;
+            Connection con = get<span class="hljs-constructor">Connection()</span>;
+            PreparedStatement  ps = con.prepare<span class="hljs-constructor">Statement(<span class="hljs-params">sql</span>)</span>;
+            <span class="hljs-keyword">if</span> (objects != null<span class="hljs-operator"> &amp;&amp; </span>objects.length &gt; <span class="hljs-number">0</span>) &#123;
+                for (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; objects.length; i++) &#123;
+                    ps.set<span class="hljs-constructor">Object(<span class="hljs-params">i</span> + 1, <span class="hljs-params">objects</span>[<span class="hljs-params">i</span>])</span>;
+                &#125;
+            &#125;
+            ps.execute<span class="hljs-constructor">Query()</span>;
+
+        &#125;catch (SQLException e) &#123;
+            e.print<span class="hljs-constructor">StackTrace()</span>;
+        &#125;finally &#123;
+        &#125;
+        return rs;
+    &#125;
+    public void close(ResultSet rs,PreparedStatement ps,Connection conn)&#123;
+        <span class="hljs-keyword">try</span> &#123;
+            <span class="hljs-keyword">if</span>(rs!=null)&#123;
+                rs.close<span class="hljs-literal">()</span>;
+            &#125;
+            <span class="hljs-keyword">if</span>(ps!=null)&#123;
+                ps.close<span class="hljs-literal">()</span>;
+            &#125;
+            <span class="hljs-keyword">if</span>(conn!=null)&#123;
+                conn.close<span class="hljs-literal">()</span>;
+            &#125;
+        &#125; catch (SQLException e) &#123;
+            e.print<span class="hljs-constructor">StackTrace()</span>;
+        &#125;
+    &#125;
+&#125;</code></pre></div>
+
+
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/28/%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%92%8C%E5%AD%90%E6%9F%A5%E8%AF%A2/">
+                        <span class="hidden-mobile">多表查询和子查询</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+   <!-- <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>-->
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+    
+
+    
+
+    <span id="sitetime"></span>
+    <script language=javascript>
+
+
+      function siteTime(){
+        window.setTimeout("siteTime()", 1000);
+        var seconds = 1000
+        var minutes = seconds * 60
+        var hours = minutes * 60
+        var days = hours * 24
+        var years = days * 365
+        var today = new Date()
+        var todayYear = today.getFullYear()
+        var todayMonth = today.getMonth()
+        var todayDate = today.getDate()
+        var todayHour = today.getHours()
+        var todayMinute = today.getMinutes()
+        var todaySecond = today.getSeconds()
+
+        /* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+        year - 作为date对象的年份，为4位年份值
+        month - 0-11之间的整数，做为date对象的月份    特别注意
+        day - 1-31之间的整数，做为date对象的天数
+        hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+        minutes - 0-59之间的整数，做为date对象的分钟数
+        seconds - 0-59之间的整数，做为date对象的秒数
+        microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+        var t1 = Date.UTC(2020,4,30,0o0,0o0,0o0)  /*<!--注意：月份是0-11,所以需要把建站月份减一-->*/
+        var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond)
+        var diff = t2-t1
+
+        var diffYears = Math.floor(diff/years)
+        var diffDays = Math.floor((diff/days)-diffYears*365)
+        var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours)
+        var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes)
+        var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds)
+        document.getElementById("sitetime").innerHTML="本站安全运行 "+diffYears+" 年 "+diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒"
+        siteTime()}
+      </script>
+
+
+
+    <p id="hitokoto">:D 获取中...</p>
+    <script>
+      fetch('https://v1.hitokoto.cn')
+              .then(response => response.json())
+              .then(data => {
+                const hitokoto = document.getElementById('hitokoto')
+                hitokoto.innerText = data.hitokoto
+              })
+              .catch(console.error)
+    </script>
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "jdbc&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js" ></script>
+
+  
+
+
+
+  
+  
+    <script>
+      !function (e, t, a) {
+        function r() {
+          for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x + "px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e].scale + ") rotate(45deg);background:" + s[e].color + ";z-index:99999");
+          requestAnimationFrame(r)
+        }
+
+        function n() {
+          var t = "function" == typeof e.onclick && e.onclick;
+          e.onclick = function (e) {
+            t && t(), o(e)
+          }
+        }
+
+        function o(e) {
+          var a = t.createElement("div");
+          a.className = "heart", s.push({
+            el: a,
+            x: e.clientX - 5,
+            y: e.clientY - 5,
+            scale: 1,
+            alpha: 1,
+            color: c()
+          }), t.body.appendChild(a)
+        }
+
+        function i(e) {
+          var a = t.createElement("style");
+          a.type = "text/css";
+          try {
+            a.appendChild(t.createTextNode(e))
+          } catch (t) {
+            a.styleSheet.cssText = e
+          }
+          t.getElementsByTagName("head")[0].appendChild(a)
+        }
+
+        function c() {
+          return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+        }
+
+        var s = [];
+        e.requestAnimationFrame = e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame || function (e) {
+          setTimeout(e, 1e3 / 60)
+        }, i(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"), n(), r()
+      }(window, document);
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+</body>
+</html>
