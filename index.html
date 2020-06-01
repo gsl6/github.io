@@ -41,7 +41,7 @@
 
 
 <body>
-  <header style="height: 70vh;">
+  <header style="height: 100vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -142,6 +142,10 @@
           </div>
 
           
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
         </div>
       </div>
     </div>
@@ -151,7 +155,7 @@
     
       <div class="container nopadding-md">
         <div class="py-5" id="board"
-          >
+          style=margin-top:0>
           
           <div class="container">
             <div class="row">
@@ -355,6 +359,7 @@ studen</div>
 
     
     <span id="sitetime"></span>
+      <p id="hitokoto">:D 获取中...</p>
     <script language=javascript>
       function siteTime(){
         window.setTimeout("siteTime()", 1000);
@@ -388,9 +393,7 @@ studen</div>
         var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds)
         document.getElementById("sitetime").innerHTML="本站安全运行 "+diffYears+" 年 "+diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒"
         siteTime()}
-      </script>
-    <p id="hitokoto">:D 获取中...</p>
-    <script>
+
       fetch('https://v1.hitokoto.cn')
               .then(response => response.json())
               .then(data => {
