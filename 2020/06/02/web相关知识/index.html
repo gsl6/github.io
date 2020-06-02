@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <meta name="keywords" content="">
-  <title>多表查询和子查询 - Gsl&#39;s blog</title>
+  <title>web相关知识 - Gsl&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -151,8 +151,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-05-28 22:31">
-      May 28, 2020 pm
+    <time datetime="2020-06-02 23:21">
+      June 2, 2020 pm
     </time>
   </div>
 
@@ -162,7 +162,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      946 字
+      963 字
     </span>
   
 
@@ -172,7 +172,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12
+      11
        分钟
     </span>
   
@@ -211,126 +211,108 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h4 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h4><p>分析：1.查询的字段</p>
-<p>​            2.查询所需要的条件</p>
-<p>​            3.需要查询几张表</p>
-<p>一.非等值查询</p>
-<div class="hljs"><pre><code class="hljs angelscript"><span class="hljs-number">1.</span>语法：select 列名<span class="hljs-number">1</span>，列名<span class="hljs-number">2</span> <span class="hljs-keyword">from</span> 表<span class="hljs-number">1</span>，表<span class="hljs-number">2</span>
-此查询会造成大量数据冗余</code></pre></div>
-
-<p>二.等值查询</p>
-<div class="hljs"><pre><code class="hljs angelscript"><span class="hljs-number">1.</span>语法：select 列名<span class="hljs-number">1</span>，列名<span class="hljs-number">2</span> <span class="hljs-keyword">from</span> 表<span class="hljs-number">1</span>，表<span class="hljs-number">2</span>  加上约束条件</code></pre></div>
-
-
-
-<h4 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h4><p>一.内连接查询</p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528201813919.png" srcset="/img/loading.gif" style="zoom: 80%;" /> result表</p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528201950816.png" srcset="/img/loading.gif" style="zoom:80%;" />subject表</p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528202206131.png" srcset="/img/loading.gif" style="zoom:80%;" />student表</p>
-<p>匹配规则：取的是两表的交集<br>例：查询参加了考试的同学信息（学号、学生姓名、科目编号、分数）</p>
-<div class="hljs"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> s.StudentNo,s.StudentName,r.SubjectNo,r.StudentResult 
-    <span class="hljs-keyword">FROM</span> student s,<span class="hljs-keyword">result</span> r <span class="hljs-keyword">WHERE</span> s.StudentNo=r.StudentNo  
-    
-    <span class="hljs-keyword">SELECT</span> s.StudentNo,s.StudentName,r.SubjectNo,r.StudentResult 
-    <span class="hljs-keyword">FROM</span> student s <span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> <span class="hljs-keyword">result</span> r <span class="hljs-keyword">ON</span> s.StudentNo=r.StudentNo</code></pre></div>
-<ol>
-<li><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528202628613.png" srcset="/img/loading.gif" style="zoom:80%;" />
-
-
-
+              <h5 id="web简介"><a href="#web简介" class="headerlink" title="web简介"></a>web简介</h5><ol>
+<li><p>web开发: 前端开发 网站开发  java 中的web开发 不只有前端 还需要写后台</p>
+</li>
+<li><p>web资源 :也就网页上一些可以看见的就是web资源 比如图片 视频 标签 主要用于页面的</p>
+</li>
+<li><p>web的架构: c/s 架构  b/s架构</p>
 </li>
 </ol>
-<p>二.左外连接</p>
-<p>匹配的规则：以左表为基准，右表一一匹配，匹配不上的，左表依赖显示，右表设置为null<br>例：查询出所有同学，不考试的也查出来</p>
-<div class="hljs"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> s.StudentNo,s.StudentName,r.StudentResult,r.SubjectNo 
-  <span class="hljs-keyword">FROM</span> student s <span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> <span class="hljs-keyword">result</span> r <span class="hljs-keyword">ON</span> s.StudentNo=r.StudentNo</code></pre></div>
-
- <!--student表为左表，result表为右表-->
-
-<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528203551326.png" srcset="/img/loading.gif" style="zoom: 50%;" />
-
-<p>三.右外连接</p>
-<p>匹配的规则：以右表为基准，左表一一匹配，匹配不上的，右表依赖显示，左表设置为null<br>例：查一下缺考的同学</p>
-<div class="hljs"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> s.StudentNo,s.StudentName,r.SubjectNo,r.StudentResult 
-   <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">result</span> r <span class="hljs-keyword">RIGHT</span> <span class="hljs-keyword">JOIN</span> student s <span class="hljs-keyword">ON</span> r.StudentNo=s.StudentNo 
-       <span class="hljs-keyword">WHERE</span> r.StudentResult <span class="hljs-keyword">IS</span> <span class="hljs-literal">NULL</span></code></pre></div>
-
-<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528211533116.png" srcset="/img/loading.gif" style="zoom:80%;" />
-
-
-
-<p>四.子查询</p>
-<p>定义 :一个完整的查询语句 嵌套另一个完整的查询语句</p>
-<ol>
-<li><p>第一种形式 把一个子查询的结果当做另一个子查询的条件来使用</p>
-<p>例：查询参加了考试的同学信息（学号、学生姓名、科目名、分数）</p>
+<h5 id="c-s架构-也就是客户端与服务器直接进行交互，"><a href="#c-s架构-也就是客户端与服务器直接进行交互，" class="headerlink" title="c/s架构 : 也就是客户端与服务器直接进行交互，"></a>c/s架构 : 也就是客户端与服务器直接进行交互，</h5><ul>
+<li><p>优点:速度快 效率高,安全性比较高,不需要依赖与浏览器 但是需要较高的电脑配置</p>
+</li>
+<li><p>缺点:  必须在客户端安装相应的程序  维护升级比较麻烦</p>
+</li>
+</ul>
+<h5 id="b-s架构-客户端向浏览器发送-gt-浏览器再向服务器发送请求"><a href="#b-s架构-客户端向浏览器发送-gt-浏览器再向服务器发送请求" class="headerlink" title="b/s架构: 客户端向浏览器发送 ==&gt; 浏览器再向服务器发送请求"></a>b/s架构: 客户端向浏览器发送 ==&gt; 浏览器再向服务器发送请求</h5><ul>
+<li><p>优点:  维护升级方便  无缝进行替换</p>
+</li>
+<li><p>缺点: 速度慢依赖于浏览器 有些低版本浏览器动画效果是不能够显示</p>
+</li>
+<li><p>b/s架构的请求原理: </p>
+<p>​      建议连接 ==&gt;索取微信号</p>
+<p>​      聊天 =&gt;发送请求  </p>
+<p>​      聊天  接收到请求  给其响应</p>
+<p>​     请求连接关闭  </p>
+<p>​     先发送请求 再有响应  请求与响应的是配套的</p>
+</li>
+</ul>
+<h5 id="Web服务器的介绍"><a href="#Web服务器的介绍" class="headerlink" title="Web服务器的介绍"></a>Web服务器的介绍</h5><p> Web服务器一般指网站服务器，是指驻留于因特网上某种类型计算机的程序，可以向浏览器等Web客户端提供文档，也可以放置网站文件，让全世界浏览；可以放置数据文件，让全世界下载。目前最主流的三个Web服务器是tomcat 、 weblogic 、IIS</p>
+<p> url 地址: 统一资源定位符 ，也就是访问的路劲  只要是放在服务器上的  图片  页面 每一个都存在访问的路劲  </p>
+<p>  url的组成部分：</p>
+<p><a href="https://uland.taobao.com/sem/tbsearch?refpid=mm_26632258_3504122_32538762&amp;keyword=%E5%A5%B3%E8%A3%85&amp;clk1=c08fa79f9cd4b9e6c7727282760c1c1c&amp;upsid=c08fa79f9cd4b9e6c7727282760c1c1c" target="_blank" rel="noopener">https://uland.taobao.com/sem/tbsearch?refpid=mm_26632258_3504122_32538762&amp;keyword=%E5%A5%B3%E8%A3%85&amp;clk1=c08fa79f9cd4b9e6c7727282760c1c1c&amp;upsid=c08fa79f9cd4b9e6c7727282760c1c1c</a></p>
+<ul>
+<li>https  http 请求的协议</li>
+<li>uland.taobao.com  域名或者是ip地址</li>
+<li>sem/tbsearch 访问具体的资源的路劲</li>
+<li>？后面都是以键值对的形式向服务器传递的参数   多个参数 &amp;进行拼接</li>
+</ul>
+<h4 id="servlet"><a href="#servlet" class="headerlink" title="servlet"></a>servlet</h4><ol>
+<li><p>servlet 是运行在服务器的Java代码  主要用与做处理请求与响应  java web三大主组件之一</p>
+</li>
+<li><p>servlet的使用的步骤:</p>
 </li>
 </ol>
-<div class="hljs"><pre><code class="hljs n1ql"><span class="hljs-keyword">SELECT</span> s.studentNo,s.studentName,sub.SubjectName,r.studentResult 
-	<span class="hljs-keyword">FROM</span> student s <span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> result r <span class="hljs-keyword">ON</span> s.studentNo = r.studentNo 
-		<span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> <span class="hljs-symbol">`subject`</span> sub <span class="hljs-keyword">ON</span> r.subjectNo=sub.SubjectNo</code></pre></div>
+<ul>
+<li>新建一个项目，配置tomcat服务器</li>
+<li>在idea中添加servletjar</li>
+<li>在web.xml配置servlet</li>
+</ul>
+<h4 id="servlet类的实现方式"><a href="#servlet类的实现方式" class="headerlink" title="servlet类的实现方式"></a>servlet类的实现方式</h4><div class="hljs"><pre><code class="hljs scala">最常用的方式：
+public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserServlet</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span> </span>&#123;
+    <span class="hljs-meta">@Override</span>
+    public void service(<span class="hljs-type">ServletRequest</span> req, <span class="hljs-type">ServletResponse</span> res) <span class="hljs-keyword">throws</span> <span class="hljs-type">ServletException</span>, <span class="hljs-type">IOException</span> &#123;
+        <span class="hljs-keyword">super</span>.service(req, res);
+    &#125;
+&#125;</code></pre></div>
 
-<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528213038051.png" srcset="/img/loading.gif" style="zoom:80%;" />
+<h4 id="servlet的生命周期"><a href="#servlet的生命周期" class="headerlink" title="servlet的生命周期"></a>servlet的生命周期</h4><ul>
+<li><p>servlet是由tomcat容器创建 是在运行tomcat 的时候创建 所以用到 —servlet都需要添加tomcat的lib的jar</p>
+</li>
+<li><p>init() 表示servlet初始化 有且只执行一次  单例设置模式</p>
+</li>
+<li><p>service()方法 所以的请求与响应都会执行这个方法</p>
+</li>
+<li><p>destory() 方法 servlet销毁的执行这个方法  也就tomcat服务器关闭的时候执行</p>
+</li>
+<li><p>servlet 的生命周期是随着tomcat的开始而开始 结束而结束</p>
+</li>
+</ul>
+<div class="hljs"><pre><code class="hljs applescript">&lt;load-<span class="hljs-keyword">on</span>-startup&gt;<span class="hljs-number">-1</span>&lt;/load-<span class="hljs-keyword">on</span>-startup&gt;</code></pre></div>
 
-<p>子查询与连接查询嵌套:</p>
-<p>例：查询《数据库结构-1》的所有考试结果，并按成绩由高到低排列</p>
-<div class="hljs"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> s.StudentNo,s.StudentName,r.StudentResult,sub.subjectName 
-<span class="hljs-keyword">FROM</span> student s <span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> <span class="hljs-keyword">result</span> r <span class="hljs-keyword">ON</span> s.StudentNo=r.StudentNo
-	<span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> <span class="hljs-string">`subject`</span> sub <span class="hljs-keyword">ON</span> sub.subjectNo=r.SubjectNo 
-		<span class="hljs-keyword">WHERE</span> sub.subjectName=<span class="hljs-string">"数据库结构-1"</span>
-			<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> r.StudentResult <span class="hljs-keyword">DESC</span></code></pre></div>
-
-<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528212057106.png" srcset="/img/loading.gif" style="zoom:80%;" />
-
-
-
-<p>2.第二种子查询的方式:</p>
-<p>   把子查询查询出的结果当成列来进行显示:</p>
-<p>例：查询课程为《高等数学-2》且分数不小于80分的学生的学号和姓名</p>
-<div class="hljs"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> s.StudentNo,s.StudentName <span class="hljs-keyword">FROM</span> student s <span class="hljs-keyword">WHERE</span> s.StudentNo
-	<span class="hljs-keyword">IN</span>(<span class="hljs-keyword">SELECT</span> r.StudentNo <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">result</span> r <span class="hljs-keyword">WHERE</span> r.StudentResult&gt;=<span class="hljs-number">80</span>
-		<span class="hljs-keyword">AND</span> r.SubjectNo <span class="hljs-keyword">IN</span> (<span class="hljs-keyword">SELECT</span> sub.SubjectNo <span class="hljs-keyword">FROM</span> <span class="hljs-string">`subject`</span> sub 
-			<span class="hljs-keyword">WHERE</span> sub.SubjectName=<span class="hljs-string">"高等数学-2"</span>));</code></pre></div>
- <img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528213818971.png" srcset="/img/loading.gif" style="zoom: 80%;"                      />   
-
-
-
-
-
-<p>总结一下：</p>
-<div class="hljs"><pre><code class="hljs sql"><span class="hljs-comment">/* 子查询 */</span> <span class="hljs-comment">------------------</span>
-    - 子查询需用括号包裹。
-<span class="hljs-comment">-- from型</span>
-    from后要求是一个表，必须给子查询结果取个别名。
-    - 简化每个查询内的条件。
-    - from型需将结果生成一个临时表格，可用以原表的锁定的释放。
-    - 子查询返回一个表，表型子查询。
-    <span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> (<span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> tb <span class="hljs-keyword">where</span> <span class="hljs-keyword">id</span>&gt;<span class="hljs-number">0</span>) <span class="hljs-keyword">as</span> subfrom <span class="hljs-keyword">where</span> <span class="hljs-keyword">id</span>&gt;<span class="hljs-number">1</span>;
-    
-<span class="hljs-comment">-- where型</span>
-    - 子查询返回一个值，标量子查询。
-    - 不需要给子查询取别名。
-    - where子查询内的表，不能直接用以更新。
-    <span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> tb <span class="hljs-keyword">where</span> money = (<span class="hljs-keyword">select</span> <span class="hljs-keyword">max</span>(money) <span class="hljs-keyword">from</span> tb)
-    
-<span class="hljs-comment">-- 列子查询</span>
-        如果子查询结果返回的是一列。
-        使用 <span class="hljs-keyword">in</span> 或 <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> 完成查询
-        <span class="hljs-keyword">exists</span> 和 <span class="hljs-keyword">not</span> <span class="hljs-keyword">exists</span> 条件
-            如果子查询返回数据，则返回<span class="hljs-number">1</span>或<span class="hljs-number">0</span>。常用于判断条件。
-            <span class="hljs-keyword">select</span> column1 <span class="hljs-keyword">from</span> t1 <span class="hljs-keyword">where</span> <span class="hljs-keyword">exists</span> (<span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> t2);
-<span class="hljs-comment">-- 行子查询</span>
-        查询条件是一个行。
-        <span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> t1 <span class="hljs-keyword">where</span> (<span class="hljs-keyword">id</span>, gender) <span class="hljs-keyword">in</span> (<span class="hljs-keyword">select</span> <span class="hljs-keyword">id</span>, gender <span class="hljs-keyword">from</span> t2);
-        行构造符：(col1, col2, ...) 或 ROW(col1, col2, ...)
-        行构造符通常用于与对能返回两个或两个以上列的子查询进行比较。
-        
-<span class="hljs-comment">-- 特殊运算符</span>
-    != all()    相当于 not in
-    = some()    相当于 in。any 是 some 的别名
-    != some()   不等同于 not in，不等于其中某一个。
-    all, some 可以配合其他运算符一起使用。</code></pre></div>
-
+<p>设置这个表示 立即加载 是要是&gt;=0 就可以 可以为负数  默认值就是负数  最优先加载，值越小越优先加载</p>
+<h5 id="servlet-访问路劲-通配符设置"><a href="#servlet-访问路劲-通配符设置" class="headerlink" title="servlet 访问路劲 通配符设置"></a>servlet 访问路劲 通配符设置</h5><ul>
+<li><p>/*    表示所有的请求与响应都会执行这个servlet</p>
+</li>
+<li><p>/userservlet  表示 请求是userServlet的时候才会执行这个servlet</p>
+</li>
+<li><p>/admin/* 访问的路劲是admin文件下所有的文件都会执行这个servlet</p>
+</li>
+<li><p>*.do 表示.do结尾的请求路劲都会执行这个servlet</p>
+</li>
+</ul>
+<h4 id="get-post区"><a href="#get-post区" class="headerlink" title="get post区"></a>get post区</h4><ul>
+<li><p>get提交数据 浏览器会缓存数据</p>
+</li>
+<li><p>get提交数据有长度限制</p>
+</li>
+<li><p>get提交数据有大小限制</p>
+</li>
+<li><p>get一般用与文件下载</p>
+</li>
+</ul>
+<p>  post：</p>
+<ul>
+<li><p>post提交数据 不会缓存数据到浏览器</p>
+</li>
+<li><p>post提交数据没有长度限制</p>
+</li>
+<li><p>post提交数据有加密 安全性高</p>
+</li>
+<li><p>post 一般用于表单提交</p>
+</li>
+</ul>
 
             </article>
             <hr>
@@ -347,21 +329,9 @@
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/05/31/jdbc/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">jdbc</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
-                    
-                      <a href="/2020/05/28/mysql/">
-                        <span class="hidden-mobile">mysql</span>
-                        <span class="visible-mobile">Next</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
                     
                   </div>
                 </div>
@@ -565,7 +535,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "多表查询和子查询&nbsp;",
+        "web相关知识&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
